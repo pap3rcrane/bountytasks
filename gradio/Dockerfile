@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.10
 
 COPY ./codebase /codebase
 
@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     apt-get install -y nodejs
     
 RUN npm install -g pnpm@9.1.0
-RUN pip install -e /codebase
+RUN pip install -e /codebase requests "huggingface_hub==0.21.4"
 RUN pip install -e /codebase/client/python
 RUN python /codebase/scripts/generate_theme.py
 

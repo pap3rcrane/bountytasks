@@ -4,7 +4,8 @@ RUN apt-get update && apt-get install -y gcc python3-dev curl
 
 COPY ./codebase /codebase
 
-RUN pip install -e /codebase
+# MLflow 2.7 imports pkg_resources, which was removed from setuptools 82.
+RUN pip install "setuptools<82" && pip install -e /codebase
 
 # Copy auth configuration
 COPY mlflow_auth.ini /mlflow_auth.ini

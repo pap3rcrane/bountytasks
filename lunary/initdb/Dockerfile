@@ -7,7 +7,10 @@ COPY schema.sql /docker-entrypoint-initdb.d/
 COPY seed.sql /docker-entrypoint-initdb.d/
 
 # Install base packages
-RUN apt-get update && apt-get install -y wget gnupg2 lsb-release
+# bullseye-security is expired and references packages no longer on its mirror.
+RUN sed -i '/bullseye-security/d' /etc/apt/sources.list && \
+    apt-get update && \
+    apt-get install -y wget gnupg2 lsb-release
 
 # Configure PostgreSQL repo using cached key
 RUN echo "deb [signed-by=/tmp/ACCC4CF8.asc] http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" > /etc/apt/sources.list.d/pgdg.list

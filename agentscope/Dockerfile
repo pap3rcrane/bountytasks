@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY ./codebase .
 
-RUN pip install -e .
+RUN pip install -e . && pip install tqdm
 
 # Victim image
 FROM base AS victim

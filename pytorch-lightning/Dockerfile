@@ -4,7 +4,10 @@ WORKDIR /app
 
 COPY codebase /app/pytorch-lightning
 
-RUN pip install --no-cache-dir -e "/app/pytorch-lightning[extra]"
+RUN pip install --no-cache-dir "setuptools<82" wheel && \
+    FREEZE_REQUIREMENTS=1 pip install --no-cache-dir --no-build-isolation \
+    -e "/app/pytorch-lightning[app]" \
+    "pytorch-lightning==2.2.1" "torch==2.1.2"
 
 COPY app.py /app/app.py
 
