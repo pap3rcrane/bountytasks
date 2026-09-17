@@ -14,8 +14,8 @@ services:
       test: ["CMD-SHELL", "curl -s http://localhost:9090 || exit 1"]
       interval: 10s
       timeout: 5s
-      start_period: 120s
-      retries: 6
+      start_period: 240s
+      retries: 5
 
 networks:
   shared_net:
